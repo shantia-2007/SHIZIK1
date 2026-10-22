@@ -3,20 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHIZIK PRO | ابرپلتفرم هوشمند ترمودینامیک، تبدیل واحد و شیمی‌فیزیک</title>
-    <link rel="icon" type="image/jpg" href="icon.jpg">
-<link rel="apple-touch-icon" href="icon.jpg">    
+    <title>SHIZIK PRO | سامانه هوشمند شیمی‌فیزیک و ترمودینامیک</title>
+    <link rel="icon" type="image/png" href="icon.png">
     <style>
+        /* تم پیش‌فرض: تاریک ملایم و چشم‌نواز (Midnight Slate) */
         :root {
-            --bg-deep: #050608;
-            --bg-panel: rgba(16, 20, 26, 0.92);
-            --bg-card: rgba(24, 30, 40, 0.95);
-            --neon-green: #39FF14;
-            --neon-yellow: #FFD700;
-            --text-white: #F3F6FA;
-            --text-muted: #9BA3B0;
-            --glow-green: 0 0 18px rgba(57, 255, 20, 0.45), 0 0 35px rgba(57, 255, 20, 0.15);
-            --glow-yellow: 0 0 18px rgba(255, 215, 0, 0.45), 0 0 35px rgba(255, 215, 0, 0.15);
+            --bg-main: #0f172a;
+            --bg-panel: #1e293b;
+            --bg-card: #263349;
+            --bg-input: #0f172a;
+            --primary: #38bdf8;
+            --primary-hover: #0284c7;
+            --secondary: #818cf8;
+            --emerald: #34d399;
+            --amber: #fbbf24;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+            --chart-bg: #0b1120;
+            --chart-grid: rgba(148, 163, 184, 0.12);
+        }
+
+        /* تم روشن کاغذی و ملایم (Soft Day Mode) */
+        body.light-mode {
+            --bg-main: #f8fafc;
+            --bg-panel: #ffffff;
+            --bg-card: #f1f5f9;
+            --bg-input: #ffffff;
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --secondary: #4f46e5;
+            --emerald: #059669;
+            --amber: #d97706;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --shadow-soft: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+            --chart-bg: #f8fafc;
+            --chart-grid: rgba(100, 116, 139, 0.15);
         }
 
         * {
@@ -24,92 +49,126 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.25s ease, color 0.2s ease, border-color 0.2s ease;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-white);
+            background-color: var(--bg-main);
+            color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
-            background-image: 
-                linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 10% 15%, rgba(57, 255, 20, 0.09) 0%, transparent 35%),
-                radial-gradient(circle at 90% 85%, rgba(255, 215, 0, 0.09) 0%, transparent 35%);
-            background-size: 38px 38px, 38px 38px, 100% 100%, 100% 100%;
             padding-bottom: 60px;
+            line-height: 1.6;
         }
 
+        /* هدر شیک و مینیمال */
         header {
-            text-align: center;
-            padding: 25px 20px 20px;
-            background: linear-gradient(180deg, rgba(10,14,18,0.98) 0%, rgba(5,6,8,0.85) 100%);
-            border-bottom: 2px solid var(--neon-green);
-            box-shadow: var(--glow-green);
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border-color);
+            padding: 22px 24px;
+            box-shadow: var(--shadow-soft);
         }
 
-        .logo-badge {
-            display: inline-block;
-            padding: 4px 16px;
-            border: 1px solid var(--neon-yellow);
-            border-radius: 20px;
-            color: var(--neon-yellow);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            background: rgba(255, 215, 0, 0.12);
-            font-weight: bold;
+        .header-content {
+            max-width: 1380px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        header h1 {
-            font-size: 3.1rem;
-            font-weight: 900;
-            letter-spacing: 7px;
-            color: var(--neon-green);
-            text-shadow: 0 0 12px var(--neon-green), 0 0 28px rgba(57, 255, 20, 0.6);
-            margin-bottom: 8px;
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
-        header h1 span {
-            color: var(--neon-yellow);
-            text-shadow: 0 0 12px var(--neon-yellow);
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
-            vertical-align: super;
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
         }
 
-        header p {
-            color: var(--neon-yellow);
-            font-size: 1.02rem;
+        .brand-title h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .brand-title h1 span {
+            color: var(--primary);
+            font-size: 0.95rem;
+            background: rgba(56, 189, 248, 0.12);
+            padding: 2px 10px;
+            border-radius: 20px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        .brand-title p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 10px;
             font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .constants-ticker {
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* نوار ثابت‌های علمی */
+        .constants-bar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 9px 15px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
-            background: rgba(255, 215, 0, 0.07);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-            padding: 8px 15px;
-            font-family: Consolas, monospace;
-            font-size: 0.88rem;
-            color: var(--neon-yellow);
+            gap: 14px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
             direction: ltr;
+            font-family: Consolas, monospace;
         }
 
-        .constants-ticker span {
+        .constants-bar span {
+            background: var(--bg-panel);
+            color: var(--primary);
             padding: 2px 10px;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(57,255,20,0.35);
             border-radius: 6px;
-            color: var(--neon-green);
+            border: 1px solid var(--border-color);
+            font-weight: 600;
         }
 
+        /* تب‌های ناوبری */
         .nav-tabs {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin: 22px auto;
+            gap: 10px;
+            margin: 24px auto;
             max-width: 1100px;
             padding: 0 15px;
             flex-wrap: wrap;
@@ -117,31 +176,29 @@
 
         .tab-btn {
             background: var(--bg-panel);
-            color: var(--neon-yellow);
-            border: 1.5px solid var(--neon-yellow);
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-size: 0.96rem;
-            font-weight: bold;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s ease;
         }
 
         .tab-btn:hover {
-            border-color: var(--neon-green);
-            color: var(--neon-green);
-            transform: translateY(-2px);
+            color: var(--text-main);
+            border-color: var(--primary);
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, var(--neon-green), #24b80b);
-            color: var(--bg-deep);
-            border-color: var(--neon-green);
-            box-shadow: var(--glow-green);
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1380px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -149,43 +206,53 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
+        /* چیدمان دو ستونه */
         .thermo-grid {
             display: grid;
-            grid-template-columns: 430px 1fr;
+            grid-template-columns: 420px 1fr;
             gap: 24px;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1080px) {
             .thermo-grid { grid-template-columns: 1fr; }
         }
 
         .panel {
             background: var(--bg-panel);
-            border: 1px solid rgba(57, 255, 20, 0.35);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            padding: 22px;
+            box-shadow: var(--shadow-soft);
         }
 
         .panel-title {
-            color: var(--neon-yellow);
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .form-group { margin-bottom: 12px; }
+        .badge-soft {
+            font-size: 0.76rem;
+            background: rgba(52, 211, 153, 0.12);
+            color: var(--emerald);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .form-group { margin-bottom: 13px; }
         .form-group label {
             display: block;
-            color: var(--neon-green);
-            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-size: 0.86rem;
             margin-bottom: 5px;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .input-with-unit { display: flex; gap: 6px; }
@@ -195,13 +262,18 @@
         select, input[type="number"], input[type="text"] {
             width: 100%;
             padding: 9px 12px;
-            background: #06080b;
-            border: 1px solid rgba(57, 255, 20, 0.55);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            color: var(--neon-yellow);
-            font-size: 0.96rem;
-            font-weight: bold;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 600;
             outline: none;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
         }
 
         .inputs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -209,140 +281,160 @@
         .btn-main {
             width: 100%;
             padding: 13px;
-            background: linear-gradient(90deg, var(--neon-green), #28c20e);
-            color: var(--bg-deep);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #ffffff;
             border: none;
             border-radius: 10px;
-            font-size: 1.02rem;
-            font-weight: 900;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
             margin-top: 8px;
-            box-shadow: var(--glow-green);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+        }
+
+        .btn-main:hover {
+            opacity: 0.94;
+            transform: translateY(-1px);
         }
 
         .btn-preset {
             background: var(--bg-card);
-            color: var(--neon-yellow);
-            border: 1px dashed var(--neon-yellow);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
             padding: 7px 9px;
             border-radius: 8px;
             font-size: 0.8rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             flex: 1;
         }
 
-        .btn-preset:hover { background: var(--neon-yellow); color: var(--bg-deep); }
-
-        .query-box {
-            background: var(--bg-card);
-            border: 2px solid var(--neon-yellow);
-            border-radius: 14px;
-            padding: 16px;
-            margin-bottom: 18px;
-            box-shadow: var(--glow-yellow);
+        .btn-preset:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
-        .query-box.disabled { opacity: 0.4; pointer-events: none; filter: grayscale(0.75); }
+        /* باکس مرحله ۲: انتخاب خواسته */
+        .query-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 18px;
+        }
+
+        .query-box.disabled {
+            opacity: 0.45;
+            pointer-events: none;
+        }
 
         .target-buttons {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .target-btn {
-            padding: 11px 8px;
-            background: var(--bg-deep);
-            color: var(--neon-green);
-            border: 1.5px solid var(--neon-green);
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 0.9rem;
+            padding: 10px 8px;
+            background: var(--bg-panel);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
             cursor: pointer;
         }
 
-        .target-btn:hover, .target-btn.selected {
-            background: var(--neon-yellow);
-            color: var(--bg-deep);
-            border-color: var(--neon-yellow);
-            box-shadow: var(--glow-yellow);
+        .target-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
+        .target-btn.selected {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* کارت‌های خلاصه نتایج */
         .summary-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
             gap: 12px;
             margin-bottom: 18px;
         }
 
         .stat-card {
             background: var(--bg-card);
-            border: 1px solid rgba(57, 255, 20, 0.3);
-            border-right: 4px solid var(--neon-green);
-            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--primary);
+            padding: 12px;
             border-radius: 10px;
             text-align: center;
         }
 
-        .stat-card h4 { color: var(--neon-yellow); font-size: 0.84rem; margin-bottom: 5px; }
-        .stat-card .main-val { color: var(--neon-green); font-size: 1.15rem; font-weight: 900; direction: ltr; }
+        .stat-card h4 { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 4px; }
+        .stat-card .main-val { color: var(--emerald); font-size: 1.15rem; font-weight: 800; direction: ltr; }
         .stat-card .sub-val { color: var(--text-muted); font-size: 0.76rem; direction: ltr; margin-top: 3px; font-family: Consolas, monospace; }
 
+        /* جعبه پاسخ تشریحی */
         .solution-box {
-            background: #06080c;
-            border: 1px solid var(--neon-green);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 16px;
-            line-height: 1.85;
+            padding: 18px;
+            line-height: 1.9;
             margin-bottom: 18px;
-            max-height: 400px;
+            max-height: 410px;
             overflow-y: auto;
         }
 
         .step-block {
             margin-bottom: 12px;
-            padding: 12px;
-            background: rgba(57, 255, 20, 0.04);
-            border-right: 4px solid var(--neon-yellow);
+            padding: 12px 14px;
+            background: var(--bg-card);
+            border-right: 3px solid var(--primary);
             border-radius: 8px;
         }
 
         .formula-badge {
             display: inline-block;
-            background: rgba(255, 215, 0, 0.14);
-            color: var(--neon-yellow);
-            border: 1px solid var(--neon-yellow);
-            padding: 2px 9px;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 1px 9px;
             border-radius: 6px;
             font-family: Consolas, monospace;
             direction: ltr;
             margin: 2px;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .highlight-ans {
-            color: var(--neon-green);
-            font-weight: 900;
-            font-size: 1.05rem;
-            background: rgba(57, 255, 20, 0.1);
+            color: var(--emerald);
+            font-weight: 800;
+            font-size: 1.04rem;
+            background: rgba(52, 211, 153, 0.12);
             padding: 1px 8px;
-            border-radius: 4px;
+            border-radius: 6px;
             direction: ltr;
             display: inline-block;
         }
 
+        /* نمودار */
         .chart-container {
-            background: #05070a;
-            border: 1px solid var(--neon-yellow);
+            background: var(--chart-bg);
+            border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 14px;
+            padding: 16px;
             text-align: center;
         }
 
-        canvas { max-width: 100%; background: #05070a; border-radius: 8px; }
+        canvas { max-width: 100%; border-radius: 8px; }
 
+        /* مبدل واحدها */
         .converter-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -358,59 +450,72 @@
         }
 
         .conv-item {
-            background: #07090d;
-            border: 1px solid rgba(57, 255, 20, 0.28);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 8px 10px;
+            padding: 9px 12px;
             display: flex;
             justify-content: space-between;
             cursor: pointer;
         }
 
-        .conv-item .u-name { color: var(--neon-yellow); font-weight: bold; font-size: 0.85rem; }
-        .conv-item .u-val { color: var(--neon-green); font-family: Consolas, monospace; font-weight: bold; }
+        .conv-item:hover { border-color: var(--primary); }
+        .conv-item .u-name { color: var(--text-muted); font-weight: 600; font-size: 0.84rem; }
+        .conv-item .u-val { color: var(--primary); font-family: Consolas, monospace; font-weight: 700; }
 
+        /* جدول ثابت R */
         .r-table { width: 100%; border-collapse: collapse; margin-top: 10px; direction: ltr; font-family: Consolas, monospace; }
-        .r-table th, .r-table td { padding: 9px 12px; border: 1px solid rgba(57, 255, 20, 0.25); text-align: center; }
-        .r-table th { background: rgba(57, 255, 20, 0.15); color: var(--neon-yellow); }
+        .r-table th, .r-table td { padding: 10px 12px; border: 1px solid var(--border-color); text-align: center; }
+        .r-table th { background: var(--bg-card); color: var(--primary); }
 
-        .calc-wrapper { max-width: 450px; margin: 0 auto; }
+        /* ماشین حساب */
+        .calc-wrapper { max-width: 440px; margin: 0 auto; }
         .calc-screen {
-            width: 100%; height: 65px; background: #040507; border: 2px solid var(--neon-yellow);
-            border-radius: 12px; color: var(--neon-green); font-size: 1.8rem; text-align: left;
+            width: 100%; height: 64px; background: var(--bg-input); border: 1px solid var(--border-color);
+            border-radius: 10px; color: var(--emerald); font-size: 1.75rem; text-align: left;
             padding: 10px 15px; margin-bottom: 14px; direction: ltr; font-family: Consolas, monospace;
         }
-        .calc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; direction: ltr; }
+        .calc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; direction: ltr; }
         .calc-btn {
-            padding: 14px 5px; font-size: 1rem; font-weight: bold; background: var(--bg-card);
-            color: var(--neon-green); border: 1px solid rgba(57, 255, 20, 0.4); border-radius: 10px; cursor: pointer;
+            padding: 14px 5px; font-size: 0.98rem; font-weight: 600; background: var(--bg-card);
+            color: var(--text-main); border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer;
         }
-        .calc-btn.op { color: var(--neon-yellow); border-color: rgba(255, 215, 0, 0.5); }
-        .calc-btn.eq { background: var(--neon-green); color: var(--bg-deep); font-weight: 900; }
+        .calc-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .calc-btn.op { color: var(--amber); }
+        .calc-btn.eq { background: var(--primary); color: #fff; border-color: var(--primary); }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-badge">CHEMICAL PHYSICS & THERMODYNAMICS ENGINE</div>
-    <h1>⚡ S H I Z I K <span>PRO</span> ⚡</h1>
-    <p>سامانه جامع حل گام‌به‌گام مسائل ترمودینامیک، تبدیل واحدهای مهندسی و قوانین گازها</p>
+    <div class="header-content">
+        <div class="brand-box">
+            <div class="brand-logo">⚛</div>
+            <div class="brand-title">
+                <h1>SHIZIK <span>PRO</span></h1>
+                <p>سامانه جامع حل گام‌به‌گام مسائل شیمی‌فیزیک، ترمودینامیک و تبدیل واحد</p>
+            </div>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+            <span>☀️</span> تغییر به حالت روشن (Day Mode)
+        </button>
+    </div>
 </header>
 
-<div class="constants-ticker">
-    <div>ثابت‌های کلیدی جزوه:</div>
+<div class="constants-bar">
+    <div>ثابت‌های مرجع جزوه:</div>
     <span>R = 0.08205 L·atm/(mol·K)</span>
     <span>R = 1.986 cal/(mol·K)</span>
     <span>R = 8.314 J/(mol·K)</span>
     <span>1 L·atm = 24.22 cal = 101.325 J</span>
-    <span>1 atm = 760 Torr = 760 mmHg</span>
+    <span>1 atm = 760 Torr</span>
 </div>
 
 <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('thermo', this)">🔥 ۱. حل مسائل فرآیندهای ترمودینامیکی</button>
-    <button class="tab-btn" onclick="switchTab('units', this)">🔄 ۲. مبدل جامع واحدها و جدول R</button>
-    <button class="tab-btn" onclick="switchTab('gas', this)">💨 ۳. قوانین گازها، مخلوط و U_rms</button>
-    <button class="tab-btn" onclick="switchTab('calc', this)">🧮 ۴. ماشین‌حساب مهندسی Shizik</button>
+    <button class="tab-btn active" onclick="switchTab('thermo', this)">۱. فرآیندهای ترمودینامیکی</button>
+    <button class="tab-btn" onclick="switchTab('units', this)">۲. مبدل واحدها و جدول R</button>
+    <button class="tab-btn" onclick="switchTab('gas', this)">۳. قوانین گازها و سرعت مولکولی</button>
+    <button class="tab-btn" onclick="switchTab('calc', this)">۴. ماشین‌حساب علمی</button>
 </div>
 
 <div class="container">
@@ -420,12 +525,12 @@
         <div class="thermo-grid">
             <div class="panel">
                 <div class="panel-title">
-                    <span>⚙️ مرحله ۱: ورود داده‌های مسئله</span>
-                    <span style="font-size: 0.78rem; color: var(--neon-green);">با تبدیل واحد خودکار</span>
+                    <span>۱. ورود داده‌های مسئله</span>
+                    <span class="badge-soft">تبدیل واحد خودکار</span>
                 </div>
 
                 <div style="margin-bottom: 14px;">
-                    <label style="color: var(--neon-yellow); font-size: 0.82rem; display:block; margin-bottom:5px;">📌 بارگذاری سریع مثال‌های حل‌شده جزوه:</label>
+                    <label style="color: var(--text-muted); font-size: 0.82rem; display:block; margin-bottom:6px;">بارگذاری سریع مثال‌های حل‌شده جزوه:</label>
                     <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                         <button class="btn-preset" onclick="loadPreset('slide65')">اسلاید ۶۵ (ایزوترم رورسیبل)</button>
                         <button class="btn-preset" onclick="loadPreset('slide67')">اسلاید ۶۷ (آدیاباتیک رورسیبل)</button>
@@ -540,37 +645,37 @@
                     </div>
                 </div>
 
-                <button class="btn-main" onclick="prepareSystem()">⚡ ۱. ثبت داده‌ها، تبدیل واحد و آماده‌سازی</button>
-                <button class="btn-preset" style="width:100%; margin-top:8px;" onclick="resetThermo()">پاک کردن و ریست فرم</button>
+                <button class="btn-main" onclick="prepareSystem()">ثبت داده‌ها و آماده‌سازی سیستم</button>
+                <button class="btn-preset" style="width:100%; margin-top:8px;" onclick="resetThermo()">پاک کردن فرم</button>
             </div>
 
             <div class="panel">
                 <div id="queryBox" class="query-box disabled">
                     <div class="panel-title" style="margin-bottom: 6px; border:none;">
-                        <span>🎯 مرحله ۲: انتخاب کنید سایت کدام خواسته مسئله را برایتان حل کند؟</span>
+                        <span>۲. انتخاب خواسته مسئله (چه کمیتی محاسبه شود؟)</span>
                     </div>
-                    <p style="font-size: 0.88rem; color: var(--text-muted);">پس از ثبت داده‌ها، روی هر یک از گزینه‌های زیر کلیک کنید:</p>
+                    <p style="font-size: 0.86rem; color: var(--text-muted);">روی هر یک از کمیت‌های زیر کلیک کنید تا فرمول و مراحل عددگذاری آن نمایش داده شود:</p>
                     <div class="target-buttons">
-                        <button class="target-btn" onclick="showTargetResult('states', this)">📍 حالت‌های مجهول (P, V, T)</button>
-                        <button class="target-btn" onclick="showTargetResult('w', this)">⚙️ کار انجام‌شده (w)</button>
-                        <button class="target-btn" onclick="showTargetResult('q', this)">🔥 گرمای مبادله‌شده (q)</button>
-                        <button class="target-btn" onclick="showTargetResult('dU', this)">🔋 انرژی داخلی (ΔU)</button>
-                        <button class="target-btn" onclick="showTargetResult('dH', this)">🌡️ تغییر آنتالپی (ΔH)</button>
-                        <button class="target-btn selected" onclick="showTargetResult('all', this)">🚀 حل کامل تمام موارد</button>
+                        <button class="target-btn" onclick="showTargetResult('states', this)">حالت‌های مجهول (P, V, T)</button>
+                        <button class="target-btn" onclick="showTargetResult('w', this)">کار انجام‌شده (w)</button>
+                        <button class="target-btn" onclick="showTargetResult('q', this)">گرمای مبادله‌شده (q)</button>
+                        <button class="target-btn" onclick="showTargetResult('dU', this)">انرژی داخلی (ΔU)</button>
+                        <button class="target-btn" onclick="showTargetResult('dH', this)">تغییر آنتالپی (ΔH)</button>
+                        <button class="target-btn selected" onclick="showTargetResult('all', this)">حل کامل تمام موارد</button>
                     </div>
                 </div>
 
                 <div id="summaryCards" class="summary-cards" style="display: none;"></div>
 
-                <div class="panel-title"><span>📝 پاسخ تشریحی گام‌به‌گام (بر اساس فرمول‌های جزوه)</span></div>
+                <div class="panel-title"><span>پاسخ تشریحی گام‌به‌گام</span></div>
                 <div id="solutionOutput" class="solution-box">لطفاً داده‌های مسئله را وارد کرده و دکمه «ثبت داده‌ها» را بزنید...</div>
 
                 <div class="chart-container">
-                    <div style="color: var(--neon-yellow); font-weight: bold; margin-bottom: 10px; display:flex; justify-content:space-between; padding:0 10px;">
-                        <span>📊 نمودار ترمودینامیکی P-V</span>
-                        <span style="color: var(--neon-green); font-size:0.85rem;">سطح هاشورخورده = کار انجام‌شده (∫P dV)</span>
+                    <div style="color: var(--text-main); font-weight: 700; margin-bottom: 10px; display:flex; justify-content:space-between; padding:0 10px; font-size:0.9rem;">
+                        <span>نمودار ترمودینامیکی P-V</span>
+                        <span style="color: var(--primary);">سطح رنگی زیر منحنی = کار انجام‌شده (∫P dV)</span>
                     </div>
-                    <canvas id="pvCanvas" width="720" height="300"></canvas>
+                    <canvas id="pvCanvas" width="720" height="290"></canvas>
                 </div>
             </div>
         </div>
@@ -580,7 +685,7 @@
     <div id="tab-units" class="tab-content">
         <div class="converter-grid">
             <div class="panel">
-                <div class="panel-title">⚡ ۱. مبدل جامع واحدهای کار، گرما و انرژی (اسلاید ۲۵)</div>
+                <div class="panel-title">۱. مبدل واحدهای کار، گرما و انرژی (اسلاید ۲۵)</div>
                 <div class="input-with-unit">
                     <input type="number" id="conv_E_val" value="1" step="any" oninput="convertEnergy()">
                     <select id="conv_E_unit" style="width: 140px;" onchange="convertEnergy()">
@@ -597,7 +702,7 @@
             </div>
 
             <div class="panel">
-                <div class="panel-title">⏲️ ۲. مبدل جامع واحدهای فشار (اسلاید ۲۵ و ۲۸)</div>
+                <div class="panel-title">۲. مبدل واحدهای فشار (اسلاید ۲۵ و ۲۸)</div>
                 <div class="input-with-unit">
                     <input type="number" id="conv_P_val" value="1" step="any" oninput="convertPressure()">
                     <select id="conv_P_unit" style="width: 140px;" onchange="convertPressure()">
@@ -615,7 +720,7 @@
             </div>
 
             <div class="panel">
-                <div class="panel-title">🧪 ۳. مبدل جامع واحدهای حجم (اسلاید ۲۵)</div>
+                <div class="panel-title">۳. مبدل واحدهای حجم (اسلاید ۲۵)</div>
                 <div class="input-with-unit">
                     <input type="number" id="conv_V_val" value="100" step="any" oninput="convertVolume()">
                     <select id="conv_V_unit" style="width: 140px;" onchange="convertVolume()">
@@ -629,7 +734,7 @@
             </div>
 
             <div class="panel">
-                <div class="panel-title">🌡️ ۴. مبدل جامع واحدهای دما</div>
+                <div class="panel-title">۴. مبدل واحدهای دما</div>
                 <div class="input-with-unit">
                     <input type="number" id="conv_T_val" value="25" step="any" oninput="convertTemp()">
                     <select id="conv_T_unit" style="width: 140px;" onchange="convertTemp()">
@@ -644,7 +749,7 @@
         </div>
 
         <div class="panel" style="margin-top: 22px;">
-            <div class="panel-title">📋 جدول مرجع تمام مقادیر ثابت جهانی گازها (R) بر اساس جدول اسلاید ۲۵ و ۳۴ جزوه</div>
+            <div class="panel-title">جدول مرجع مقادیر ثابت جهانی گازها (R) بر اساس اسلاید ۲۵ و ۳۴ جزوه</div>
             <table class="r-table">
                 <thead>
                     <tr>
@@ -654,11 +759,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td style="color:var(--neon-green);font-weight:bold;">0.082057 (≈ 0.082)</td><td>L · atm · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">محاسبات قانون گاز ایده‌آل (PV = nRT)</td></tr>
-                    <tr><td style="color:var(--neon-green);font-weight:bold;">1.9858 (≈ 1.986)</td><td>cal · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">محاسبات گرما، کار، انرژی داخلی و آنتالپی برحسب کالری</td></tr>
-                    <tr><td style="color:var(--neon-green);font-weight:bold;">8.31447</td><td>J · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">محاسبات سرعت مولکولی (U_rms) و انرژی برحسب ژول</td></tr>
-                    <tr><td style="color:var(--neon-yellow);">82.057</td><td>cm³ · atm · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">زمانی که حجم برحسب سانتی‌متر مکعب باشد</td></tr>
-                    <tr><td style="color:var(--neon-yellow);">62.3637</td><td>L · Torr · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">زمانی که فشار برحسب Torr یا mmHg باشد</td></tr>
+                    <tr><td style="color:var(--emerald);font-weight:bold;">0.082057 (≈ 0.082)</td><td>L · atm · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">محاسبات قانون گاز ایده‌آل (PV = nRT)</td></tr>
+                    <tr><td style="color:var(--emerald);font-weight:bold;">1.9858 (≈ 1.986)</td><td>cal · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">محاسبات گرما، کار، انرژی داخلی و آنتالپی برحسب کالری</td></tr>
+                    <tr><td style="color:var(--emerald);font-weight:bold;">8.31447</td><td>J · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">محاسبات سرعت مولکولی (U_rms) و انرژی برحسب ژول</td></tr>
+                    <tr><td style="color:var(--primary);">82.057</td><td>cm³ · atm · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">زمانی که حجم برحسب سانتی‌متر مکعب باشد</td></tr>
+                    <tr><td style="color:var(--primary);">62.3637</td><td>L · Torr · K⁻¹ · mol⁻¹</td><td style="direction:rtl;">زمانی که فشار برحسب Torr یا mmHg باشد</td></tr>
                 </tbody>
             </table>
         </div>
@@ -667,7 +772,7 @@
     <!-- تب ۳: قوانین گازها -->
     <div id="tab-gas" class="tab-content">
         <div class="panel" style="max-width: 900px; margin: 0 auto;">
-            <div class="panel-title">💨 محاسبه دانسیته گاز (ρ)، سرعت مولکولی (U_rms) و انرژی جنبشی (Ek)</div>
+            <div class="panel-title">محاسبه دانسیته گاز (ρ)، سرعت مولکولی (U_rms) و انرژی جنبشی (Ek)</div>
             <div class="inputs-2col">
                 <div class="form-group">
                     <label>فشار گاز (P):</label>
@@ -711,7 +816,7 @@
     <!-- تب ۴: ماشین حساب -->
     <div id="tab-calc" class="tab-content">
         <div class="panel calc-wrapper">
-            <div class="panel-title" style="justify-content: center;">🧮 SHIZIK SCIENTIFIC CALCULATOR</div>
+            <div class="panel-title" style="justify-content: center;">ماشین‌حساب مهندسی SHIZIK</div>
             <input type="text" id="calcDisplay" class="calc-screen" readonly placeholder="0">
             <div class="calc-grid">
                 <button class="calc-btn op" onclick="calcInput('1.986')">R_cal</button>
@@ -754,6 +859,15 @@
     const R_J = 8.314;
     const LATM_TO_CAL = R_CAL / R_ATM;
     let solvedData = null;
+
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        document.getElementById('themeBtn').innerHTML = isLight 
+            ? '<span>🌙</span> تغییر به حالت تاریک (Dark Mode)' 
+            : '<span>☀️</span> تغییر به حالت روشن (Day Mode)';
+        if (solvedData) drawPVChart(solvedData);
+    }
 
     function switchTab(tabName, btn) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -826,7 +940,7 @@
         const Cp = cp_mult * R_CAL;
 
         let stateSteps = [];
-        stateSteps.push(`<b>📍 گام ۱: تعیین مشخصات حالت اولیه سیستم (P₁, V₁, T₁)</b><br>`);
+        stateSteps.push(`<b>گام ۱: تعیین مشخصات حالت اولیه سیستم (P₁, V₁, T₁)</b><br>`);
         stateSteps.push(`معادله حالت گاز ایده‌آل: <span class="formula-badge">P₁V₁ = nRT₁</span><br>`);
 
         if (P1 !== null && T1 !== null && V1 === null) {
@@ -854,7 +968,7 @@
             else if (V2 !== null && P2 === null) P2 = (P1 * V1) / V2;
             else if (P2 === null && V2 === null) { alert("برای ایزوترم P2 یا V2 را وارد کنید."); return; }
 
-            procSteps.push(`<b>📍 گام ۲: حالت نهایی در ایزوترم رورسیبل (T₂ = T₁ = ${T1.toFixed(1)} K)</b><br>`);
+            procSteps.push(`<b>گام ۲: حالت نهایی در ایزوترم رورسیبل (T₂ = T₁ = ${T1.toFixed(1)} K)</b><br>`);
             procSteps.push(`فرمول بویل: <span class="formula-badge">P₁V₁ = P₂V₂</span> ⇒ V₂ = <span class="highlight-ans">${V2.toFixed(2)} lit</span> , P₂ = <span class="highlight-ans">${P2.toFixed(2)} atm</span>`);
 
             w_cal = n * R_CAL * T1 * Math.log(V2 / V1);
@@ -862,10 +976,10 @@
             q_cal = w_cal;
             dU_cal = 0; dH_cal = 0;
 
-            dUStep = `<b>🔋 تغییر انرژی داخلی (ΔU):</b><br>چون دما ثابت است (dT = 0): ⇒ <span class="highlight-ans">ΔU = 0 cal</span>`;
-            dHStep = `<b>🌡️ تغییر آنتالپی (ΔH):</b><br>چون dT = 0 است: ⇒ <span class="highlight-ans">ΔH = 0 cal</span>`;
-            wStep = `<b>⚙️ کار انجام‌شده در ایزوترم رورسیبل (اسلاید ۶۵):</b><br><span class="formula-badge">w = nRT ln(V₂/V₁) = nRT ln(P₁/P₂)</span><br>⇒ w = ${n} × 1.986 × ${T1.toFixed(1)} × ln(${V2.toFixed(2)} / ${V1.toFixed(2)}) = <span class="highlight-ans">${w_cal.toFixed(2)} cal</span> (${w_latm.toFixed(2)} L·atm)`;
-            qStep = `<b>🔥 گرمای مبادله‌شده (q):</b><br>طبق قانون اول (<span class="formula-badge">ΔU = q - w = 0 ⇒ q = w</span>): ⇒ <span class="highlight-ans">q = ${q_cal.toFixed(2)} cal</span>`;
+            dUStep = `<b>تغییر انرژی داخلی (ΔU):</b> چون دما ثابت است (dT = 0) ⇒ <span class="highlight-ans">ΔU = 0 cal</span>`;
+            dHStep = `<b>تغییر آنتالپی (ΔH):</b> چون dT = 0 است ⇒ <span class="highlight-ans">ΔH = 0 cal</span>`;
+            wStep = `<b>کار انجام‌شده در ایزوترم رورسیبل (اسلاید ۶۵):</b><br><span class="formula-badge">w = nRT ln(V₂/V₁) = nRT ln(P₁/P₂)</span><br>⇒ w = ${n} × 1.986 × ${T1.toFixed(1)} × ln(${V2.toFixed(2)} / ${V1.toFixed(2)}) = <span class="highlight-ans">${w_cal.toFixed(2)} cal</span> (${w_latm.toFixed(2)} L·atm)`;
+            qStep = `<b>گرمای مبادله‌شده (q):</b> طبق قانون اول (<span class="formula-badge">ΔU = q - w = 0 ⇒ q = w</span>) ⇒ <span class="highlight-ans">q = ${q_cal.toFixed(2)} cal</span>`;
 
         } else if (proc === 'iso_irrev') {
             T2 = T1;
@@ -873,7 +987,7 @@
             else if (V2 !== null && P2 === null) P2 = (P1 * V1) / V2;
             else if (P2 === null && V2 === null) { alert("برای ایزوترم P2 یا V2 را وارد کنید."); return; }
 
-            procSteps.push(`<b>📍 گام ۲: حالت نهایی در ایزوترم غیررورسیبل (اسلاید ۶۸)</b><br>`);
+            procSteps.push(`<b>گام ۲: حالت نهایی در ایزوترم غیررورسیبل (اسلاید ۶۸)</b><br>`);
             procSteps.push(`رابطه گاز ایده‌آل: <span class="formula-badge">P₁V₁ = P₂V₂</span> ⇒ V₂ = <span class="highlight-ans">${V2.toFixed(2)} lit</span> , P₂ = <span class="highlight-ans">${P2.toFixed(2)} atm</span>`);
 
             w_latm = P2 * (V2 - V1);
@@ -881,10 +995,10 @@
             q_cal = w_cal;
             dU_cal = 0; dH_cal = 0;
 
-            dUStep = `<b>🔋 تغییر انرژی داخلی (ΔU):</b> ⇒ <span class="highlight-ans">ΔU = 0 cal</span>`;
-            dHStep = `<b>🌡️ تغییر آنتالپی (ΔH):</b> ⇒ <span class="highlight-ans">ΔH = 0 cal</span>`;
-            wStep = `<b>⚙️ کار انجام‌شده در ایزوترم غیررورسیبل (اسلاید ۶۸):</b><br><span class="formula-badge">w = P₂(V₂ - V₁) = nRT(1 - P₂/P₁)</span><br>⇒ w = ${n} × 1.986 × ${T1.toFixed(1)} × (1 - ${P2.toFixed(2)}/${P1.toFixed(2)}) = <span class="highlight-ans">${w_cal.toFixed(2)} cal</span>`;
-            qStep = `<b>🔥 گرمای مبادله‌شده (q):</b> ⇒ <span class="highlight-ans">q = w = ${q_cal.toFixed(2)} cal</span>`;
+            dUStep = `<b>تغییر انرژی داخلی (ΔU):</b> ⇒ <span class="highlight-ans">ΔU = 0 cal</span>`;
+            dHStep = `<b>تغییر آنتالپی (ΔH):</b> ⇒ <span class="highlight-ans">ΔH = 0 cal</span>`;
+            wStep = `<b>کار انجام‌شده در ایزوترم غیررورسیبل (اسلاید ۶۸):</b><br><span class="formula-badge">w = P₂(V₂ - V₁) = nRT(1 - P₂/P₁)</span><br>⇒ w = ${n} × 1.986 × ${T1.toFixed(1)} × (1 - ${P2.toFixed(2)}/${P1.toFixed(2)}) = <span class="highlight-ans">${w_cal.toFixed(2)} cal</span>`;
+            qStep = `<b>گرمای مبادله‌شده (q):</b> ⇒ <span class="highlight-ans">q = w = ${q_cal.toFixed(2)} cal</span>`;
 
         } else if (proc === 'adia_rev') {
             if (P2 !== null && V2 === null) V2 = V1 * Math.pow(P1 / P2, 1 / gamma);
@@ -892,7 +1006,7 @@
             else { alert("برای آدیاباتیک رورسیبل P2 یا V2 را وارد کنید."); return; }
             T2 = (P2 * V2) / (n * R_ATM);
 
-            procSteps.push(`<b>📍 گام ۲: حالت نهایی در آدیاباتیک رورسیبل (اسلاید ۶۳ و ۶۷)</b><br>`);
+            procSteps.push(`<b>گام ۲: حالت نهایی در آدیاباتیک رورسیبل (اسلاید ۶۳ و ۶۷)</b><br>`);
             procSteps.push(`<span class="formula-badge">P₁V₁^γ = P₂V₂^γ</span> (γ = ${gamma.toFixed(2)}) ⇒ V₂ = <span class="highlight-ans">${V2.toFixed(2)} lit</span> , T₂ = <span class="highlight-ans">${T2.toFixed(1)} K</span>`);
 
             q_cal = 0;
@@ -901,17 +1015,17 @@
             w_latm = w_cal / LATM_TO_CAL;
             dH_cal = n * Cp * (T2 - T1);
 
-            qStep = `<b>🔥 گرمای مبادله‌شده (q):</b> فرآیند آدیاباتیک است ⇒ <span class="highlight-ans">q = 0 cal</span>`;
-            dUStep = `<b>🔋 تغییر انرژی داخلی (ΔU):</b><br><span class="formula-badge">ΔU = n · Cv · (T₂ - T₁)</span> = <span class="highlight-ans">${dU_cal.toFixed(1)} cal</span>`;
-            wStep = `<b>⚙️ کار انجام‌شده (w):</b><br><span class="formula-badge">w = -ΔU</span> = <span class="highlight-ans">${w_cal.toFixed(1)} cal</span>`;
-            dHStep = `<b>🌡️ تغییر آنتالپی (ΔH):</b><br><span class="formula-badge">ΔH = n · Cp · (T₂ - T₁)</span> = <span class="highlight-ans">${dH_cal.toFixed(1)} cal</span>`;
+            qStep = `<b>گرمای مبادله‌شده (q):</b> فرآیند آدیاباتیک است ⇒ <span class="highlight-ans">q = 0 cal</span>`;
+            dUStep = `<b>تغییر انرژی داخلی (ΔU):</b> <span class="formula-badge">ΔU = n · Cv · (T₂ - T₁)</span> = <span class="highlight-ans">${dU_cal.toFixed(1)} cal</span>`;
+            wStep = `<b>کار انجام‌شده (w):</b> <span class="formula-badge">w = -ΔU</span> = <span class="highlight-ans">${w_cal.toFixed(1)} cal</span>`;
+            dHStep = `<b>تغییر آنتالپی (ΔH):</b> <span class="formula-badge">ΔH = n · Cp · (T₂ - T₁)</span> = <span class="highlight-ans">${dH_cal.toFixed(1)} cal</span>`;
 
         } else if (proc === 'adia_irrev') {
             if (P2 === null) { alert("در آدیاباتیک غیررورسیبل فشار نهایی P2 باید معلوم باشد."); return; }
             T2 = T1 * (cv_mult + (P2 / P1)) / (cv_mult + 1);
             V2 = (n * 0.083 * T2) / P2;
 
-            procSteps.push(`<b>📍 گام ۲: یافتن T₂ و V₂ در آدیاباتیک غیررورسیبل (اسلاید ۶۹)</b><br>`);
+            procSteps.push(`<b>گام ۲: یافتن T₂ و V₂ در آدیاباتیک غیررورسیبل (اسلاید ۶۹)</b><br>`);
             procSteps.push(`<span class="formula-badge">n·Cv(T₂ - T₁) = -P₂(V₂ - V₁)</span> ⇒ <span class="highlight-ans">T₂ = ${T2.toFixed(1)} K</span> و <span class="highlight-ans">V₂ = ${V2.toFixed(2)} lit</span>`);
 
             q_cal = 0;
@@ -920,10 +1034,10 @@
             w_latm = w_cal / LATM_TO_CAL;
             dH_cal = n * Cp * (T2 - T1);
 
-            qStep = `<b>🔥 گرمای مبادله‌شده (q):</b> ⇒ <span class="highlight-ans">q = 0 cal</span>`;
-            dUStep = `<b>🔋 تغییر انرژی داخلی (ΔU):</b> ⇒ <span class="highlight-ans">${dU_cal.toFixed(1)} cal</span>`;
-            wStep = `<b>⚙️ کار انجام‌شده (w = -ΔU):</b> ⇒ <span class="highlight-ans">${w_cal.toFixed(1)} cal</span>`;
-            dHStep = `<b>🌡️ تغییر آنتالپی (ΔH):</b> ⇒ <span class="highlight-ans">${dH_cal.toFixed(1)} cal</span>`;
+            qStep = `<b>گرمای مبادله‌شده (q):</b> ⇒ <span class="highlight-ans">q = 0 cal</span>`;
+            dUStep = `<b>تغییر انرژی داخلی (ΔU):</b> ⇒ <span class="highlight-ans">${dU_cal.toFixed(1)} cal</span>`;
+            wStep = `<b>کار انجام‌شده (w = -ΔU):</b> ⇒ <span class="highlight-ans">${w_cal.toFixed(1)} cal</span>`;
+            dHStep = `<b>تغییر آنتالپی (ΔH):</b> ⇒ <span class="highlight-ans">${dH_cal.toFixed(1)} cal</span>`;
 
         } else if (proc === 'isobar') {
             P2 = P1;
@@ -931,7 +1045,7 @@
             else if (T2 !== null && V2 === null) V2 = V1 * (T2 / T1);
             else { alert("برای فرآیند هم‌فشار، V2 یا T2 را وارد کنید."); return; }
 
-            procSteps.push(`<b>📍 گام ۲: فرآیند هم‌فشار (P₂ = P₁ = ${P1.toFixed(2)} atm)</b> ⇒ V₂ = <span class="highlight-ans">${V2.toFixed(2)} lit</span> , T₂ = <span class="highlight-ans">${T2.toFixed(1)} K</span>`);
+            procSteps.push(`<b>گام ۲: فرآیند هم‌فشار (P₂ = P₁ = ${P1.toFixed(2)} atm)</b> ⇒ V₂ = <span class="highlight-ans">${V2.toFixed(2)} lit</span> , T₂ = <span class="highlight-ans">${T2.toFixed(1)} K</span>`);
 
             w_latm = P1 * (V2 - V1);
             w_cal = w_latm * LATM_TO_CAL;
@@ -939,10 +1053,10 @@
             q_cal = dH_cal;
             dU_cal = n * Cv * (T2 - T1);
 
-            wStep = `<b>⚙️ کار در فشار ثابت:</b> <span class="formula-badge">w = P(V₂ - V₁)</span> = <span class="highlight-ans">${w_cal.toFixed(2)} cal</span>`;
-            dHStep = `<b>🌡️ تغییر آنتالپی:</b> <span class="formula-badge">ΔH = n·Cp·(T₂ - T₁)</span> = <span class="highlight-ans">${dH_cal.toFixed(2)} cal</span>`;
-            qStep = `<b>🔥 گرما در فشار ثابت:</b> <span class="formula-badge">q_p = ΔH</span> = <span class="highlight-ans">${q_cal.toFixed(2)} cal</span>`;
-            dUStep = `<b>🔋 تغییر انرژی داخلی:</b> <span class="formula-badge">ΔU = q - w</span> = <span class="highlight-ans">${dU_cal.toFixed(2)} cal</span>`;
+            wStep = `<b>کار در فشار ثابت:</b> <span class="formula-badge">w = P(V₂ - V₁)</span> = <span class="highlight-ans">${w_cal.toFixed(2)} cal</span>`;
+            dHStep = `<b>تغییر آنتالپی:</b> <span class="formula-badge">ΔH = n·Cp·(T₂ - T₁)</span> = <span class="highlight-ans">${dH_cal.toFixed(2)} cal</span>`;
+            qStep = `<b>گرما در فشار ثابت:</b> <span class="formula-badge">q_p = ΔH</span> = <span class="highlight-ans">${q_cal.toFixed(2)} cal</span>`;
+            dUStep = `<b>تغییر انرژی داخلی:</b> <span class="formula-badge">ΔU = q - w</span> = <span class="highlight-ans">${dU_cal.toFixed(2)} cal</span>`;
 
         } else if (proc === 'isochor') {
             V2 = V1;
@@ -950,17 +1064,17 @@
             else if (T2 !== null && P2 === null) P2 = P1 * (T2 / T1);
             else { alert("برای فرآیند هم‌حجم، P2 یا T2 را وارد کنید."); return; }
 
-            procSteps.push(`<b>📍 گام ۲: فرآیند هم‌حجم (V₂ = V₁ = ${V1.toFixed(2)} lit)</b> ⇒ P₂ = <span class="highlight-ans">${P2.toFixed(2)} atm</span> , T₂ = <span class="highlight-ans">${T2.toFixed(1)} K</span>`);
+            procSteps.push(`<b>گام ۲: فرآیند هم‌حجم (V₂ = V₁ = ${V1.toFixed(2)} lit)</b> ⇒ P₂ = <span class="highlight-ans">${P2.toFixed(2)} atm</span> , T₂ = <span class="highlight-ans">${T2.toFixed(1)} K</span>`);
 
             w_cal = 0; w_latm = 0;
             dU_cal = n * Cv * (T2 - T1);
             q_cal = dU_cal;
             dH_cal = n * Cp * (T2 - T1);
 
-            wStep = `<b>⚙️ کار در حجم ثابت (dV = 0):</b> ⇒ <span class="highlight-ans">w = 0 cal</span>`;
-            dUStep = `<b>🔋 تغییر انرژی داخلی:</b> ⇒ <span class="highlight-ans">${dU_cal.toFixed(2)} cal</span>`;
-            qStep = `<b>🔥 گرما در حجم ثابت (q_v = ΔU):</b> ⇒ <span class="highlight-ans">${q_cal.toFixed(2)} cal</span>`;
-            dHStep = `<b>🌡️ تغییر آنتالپی:</b> ⇒ <span class="highlight-ans">${dH_cal.toFixed(2)} cal</span>`;
+            wStep = `<b>کار در حجم ثابت (dV = 0):</b> ⇒ <span class="highlight-ans">w = 0 cal</span>`;
+            dUStep = `<b>تغییر انرژی داخلی:</b> ⇒ <span class="highlight-ans">${dU_cal.toFixed(2)} cal</span>`;
+            qStep = `<b>گرما در حجم ثابت (q_v = ΔU):</b> ⇒ <span class="highlight-ans">${q_cal.toFixed(2)} cal</span>`;
+            dHStep = `<b>تغییر آنتالپی:</b> ⇒ <span class="highlight-ans">${dH_cal.toFixed(2)} cal</span>`;
         }
 
         solvedData = {
@@ -1017,12 +1131,19 @@
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const padL = 60, padR = 40, padT = 30, padB = 40;
+        const isLight = document.body.classList.contains('light-mode');
+        const axisColor = isLight ? "#475569" : "#94a3b8";
+        const lineColor = isLight ? "#0284c7" : "#38bdf8";
+        const fillColor = isLight ? "rgba(2, 132, 199, 0.16)" : "rgba(56, 189, 248, 0.18)";
+        const pointColor = isLight ? "#d97706" : "#fbbf24";
+
+        const padL = 60, padR = 45, padT = 30, padB = 40;
         const w = canvas.width - padL - padR, h = canvas.height - padT - padB;
         const maxV = Math.max(d.V1, d.V2) * 1.15, maxP = Math.max(d.P1, d.P2) * 1.15;
         const toX = v => padL + (v / maxV) * w, toY = p => padT + h - (p / maxP) * h;
 
-        ctx.strokeStyle = "#39FF14"; ctx.lineWidth = 2;
+        ctx.strokeStyle = axisColor;
+        ctx.lineWidth = 1.5;
         ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + h); ctx.lineTo(padL + w, padT + h); ctx.stroke();
 
         let points = [];
@@ -1044,7 +1165,7 @@
         }
 
         if (d.proc !== 'isochor') {
-            ctx.fillStyle = "rgba(57, 255, 20, 0.22)";
+            ctx.fillStyle = fillColor;
             ctx.beginPath();
             ctx.moveTo(toX(points[0].v), toY(0));
             points.forEach(pt => ctx.lineTo(toX(pt.v), toY(pt.p)));
@@ -1053,14 +1174,16 @@
             ctx.fill();
         }
 
-        ctx.strokeStyle = "#39FF14"; ctx.lineWidth = 3;
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 3;
         ctx.beginPath();
         points.forEach((pt, idx) => idx === 0 ? ctx.moveTo(toX(pt.v), toY(pt.p)) : ctx.lineTo(toX(pt.v), toY(pt.p)));
         ctx.stroke();
 
         [[d.V1, d.P1, "1"], [d.V2, d.P2, "2"]].forEach(([v, p, lbl]) => {
-            ctx.fillStyle = "#FFD700";
-            ctx.beginPath(); ctx.arc(toX(v), toY(p), 6, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = pointColor;
+            ctx.beginPath(); ctx.arc(toX(v), toY(p), 5.5, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = axisColor;
             ctx.font = "bold 12px Consolas";
             ctx.fillText(`State ${lbl} (${v.toFixed(1)}L, ${p.toFixed(1)}atm)`, toX(v) - 35, toY(p) - 10);
         });
